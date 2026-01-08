@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Writing Studio - AI-Powered Content Creation | BlackRoad</title>
+    <style>
+        :root {
+            --hot-pink: #FF1D6C;
+            --amber: #F5A623;
+            --violet: #9C27B0;
+            --electric-blue: #2979FF;
+            --black: #000000;
+            --white: #FFFFFF;
+            --phi: 1.618;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: var(--black);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated grid background */
+        .grid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(255, 29, 108, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 29, 108, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        /* Glowing orbs */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            animation: float 20s infinite;
+            z-index: 1;
+        }
+
+        .orb1 {
+            width: 400px;
+            height: 400px;
+            background: var(--amber);
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .orb2 {
+            width: 300px;
+            height: 300px;
+            background: var(--hot-pink);
+            top: 50%;
+            right: 10%;
+            animation-delay: 7s;
+        }
+
+        .orb3 {
+            width: 350px;
+            height: 350px;
+            background: var(--violet);
+            bottom: 10%;
+            left: 30%;
+            animation-delay: 14s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(100px, -100px) scale(1.1); }
+            66% { transform: translate(-100px, 100px) scale(0.9); }
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: calc(8px * var(--phi) * var(--phi) * var(--phi)); /* 34px */
+        }
+
+        /* Header */
+        header {
+            padding: calc(8px * var(--phi) * var(--phi)) 0; /* 21px */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: calc(8px * var(--phi) * var(--phi)); /* 21px */
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--amber), var(--hot-pink), var(--violet), var(--electric-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            margin-left: calc(8px * var(--phi) * var(--phi)); /* 21px */
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--hot-pink);
+        }
+
+        /* Hero section */
+        .hero {
+            text-align: center;
+            padding: calc(8px * var(--phi) * var(--phi) * var(--phi) * var(--phi)) 0; /* 89px */
+        }
+
+        h1 {
+            font-size: calc(8px * var(--phi) * var(--phi) * var(--phi) * var(--phi)); /* 89px */
+            font-weight: 900;
+            margin-bottom: calc(8px * var(--phi) * var(--phi)); /* 21px */
+            background: linear-gradient(135deg, var(--amber), var(--hot-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tagline {
+            font-size: calc(8px * var(--phi) * var(--phi)); /* 21px */
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: calc(8px * var(--phi) * var(--phi) * var(--phi)); /* 34px */
+        }
+
+        .problem {
+            font-size: calc(8px * var(--phi)); /* 13px */
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: calc(8px * var(--phi) * var(--phi) * var(--phi)); /* 34px */
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: calc(8px * var(--phi)); /* 13px */
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: calc(8px * var(--phi)) calc(8px * var(--phi) * var(--phi) * var(--phi)); /* 13px 34px */
+            font-size: calc(8px * var(--phi)); /* 13px */
+            font-weight: 700;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--hot-pink), var(--violet));
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 29, 108, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--hot-pink);
+        }
+
+        .btn-secondary:hover {
+            background: var(--hot-pink);
+        }
+
+        /* Features section */
+        .features {
+            padding: calc(8px * var(--phi) * var(--phi) * var(--phi) * var(--phi)) 0; /* 89px */
+        }
+
+        h2 {
+            font-size: calc(8px * var(--phi) * var(--phi) * var(--phi)); /* 55px */
+            font-weight: 800;
+            margin-bottom: calc(8px * var(--phi) * var(--phi) * var(--phi)); /* 55px */
+            text-align: center;
+            background: linear-gradient(135deg, var(--hot-pink), var(--violet));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: calc(8px * var(--phi) * var(--phi)); /* 21px */
+            margin-bottom: calc(8px * var(--phi) * var(--phi) * var(--phi)); /* 34px */
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 29, 108, 0.2);
+            border-radius: 13px;
+            padding: calc(8px * var(--phi) * var(--phi)); /* 21px */
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--hot-pink);
+            box-shadow: 0 10px 30px rgba(255, 29, 108, 0.2);
+        }
+
+        .feature-icon {
+            font-size: calc(8px * var(--phi) * var(--phi) * var(--phi)); /* 34px */
+            margin-bottom: calc(8px * var(--phi)); /* 13px */
+        }
+
+        h3 {
+            font-size: calc(8px * var(--phi) * var(--phi)); /* 21px */
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--hot-pink);
+        }
+
+        /* Pricing section */
+        .pricing {
+            padding: calc(8px * var(--phi) * var(--phi) * var(--phi) * var(--phi)) 0; /* 89px */
+            text-align: center;
+        }
+
+        .pricing-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid var(--hot-pink);
+            border-radius: 21px;
+            padding: calc(8px * var(--phi) * var(--phi) * var(--phi)); /* 34px */
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .price {
+            font-size: calc(8px * var(--phi) * var(--phi) * var(--phi) * var(--phi)); /* 89px */
+            font-weight: 900;
+            color: var(--hot-pink);
+            margin: calc(8px * var(--phi)) 0; /* 13px */
+        }
+
+        .price-note {
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: calc(8px * var(--phi) * var(--phi)); /* 21px */
+        }
+
+        .features-list {
+            text-align: left;
+            margin: calc(8px * var(--phi) * var(--phi)) 0; /* 21px */
+        }
+
+        .features-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Comparison section */
+        .comparison {
+            padding: calc(8px * var(--phi) * var(--phi) * var(--phi) * var(--phi)) 0; /* 89px */
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: calc(8px * var(--phi) * var(--phi)); /* 21px */
+            margin-top: calc(8px * var(--phi) * var(--phi) * var(--phi)); /* 34px */
+        }
+
+        .comparison-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 13px;
+            padding: calc(8px * var(--phi) * var(--phi)); /* 21px */
+            text-align: center;
+        }
+
+        .vs {
+            color: var(--amber);
+            font-weight: 800;
+            margin: calc(8px * var(--phi)) 0; /* 13px */
+        }
+
+        .old-price {
+            text-decoration: line-through;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .new-price {
+            font-size: calc(8px * var(--phi) * var(--phi)); /* 21px */
+            font-weight: 800;
+            color: var(--hot-pink);
+        }
+
+        .savings {
+            color: #4CAF50;
+            font-weight: 700;
+            margin-top: 8px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: calc(8px * var(--phi) * var(--phi) * var(--phi)); /* 34px */
+            color: rgba(255, 255, 255, 0.5);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: calc(8px * var(--phi) * var(--phi) * var(--phi)); /* 34px */
+            }
+
+            h2 {
+                font-size: calc(8px * var(--phi) * var(--phi)); /* 21px */
+            }
+
+            .features-grid, .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated background -->
+    <div class="grid-bg"></div>
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">BlackRoad</div>
+            <nav>
+                <a href="https://github.com/BlackRoad-Studio">GitHub</a>
+                <a href="#features">Features</a>
+                <a href="#pricing">Pricing</a>
+            </nav>
+        </header>
+
+        <!-- Hero -->
+        <section class="hero">
+            <h1>Writing Studio</h1>
+            <p class="tagline">AI-powered writing that actually helps you</p>
+            <p class="problem">
+                Stop paying for grammar checkers that treat you like a child. Writing Studio combines
+                AI-powered grammar, style improvement, tone analysis, and research assistance in one place.
+                Write better. Write faster. Write with confidence.
+            </p>
+            <div class="cta-buttons">
+                <a href="#pricing" class="btn btn-primary">Start Free Trial</a>
+                <a href="https://github.com/BlackRoad-Studio/writing-studio" class="btn btn-secondary">View on GitHub</a>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section id="features" class="features">
+            <h2>Everything You Need to Write Better</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">✍️</div>
+                    <h3>Smart Grammar & Spelling</h3>
+                    <p>Catch typos, grammar mistakes, and punctuation errors in real-time. Context-aware corrections that actually make sense.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Style Enhancement</h3>
+                    <p>Improve clarity, conciseness, and readability. AI suggests better word choices and sentence structures without changing your voice.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎭</div>
+                    <h3>Tone Analysis</h3>
+                    <p>Match your tone to your audience. Professional, casual, persuasive, empathetic - Writing Studio adapts to your needs.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h3>Research Assistant</h3>
+                    <p>Find sources, check facts, and cite references without leaving your editor. Built-in research tools powered by AI.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <h3>Multi-Language Support</h3>
+                    <p>Write in English, Spanish, French, German, and 50+ languages. AI-powered translation and localization built in.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Writing Analytics</h3>
+                    <p>Track your progress, identify patterns, improve over time. See your writing evolve with detailed insights.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing -->
+        <section id="pricing" class="pricing">
+            <h2>Simple Pricing, Powerful Features</h2>
+            <div class="pricing-card">
+                <h3>Writing Studio Pro</h3>
+                <div class="price">$12<span style="font-size: 21px;">/month</span></div>
+                <p class="price-note">14-day free trial, no credit card required</p>
+                <ul class="features-list">
+                    <li>Unlimited grammar and spelling checks</li>
+                    <li>Advanced style and clarity suggestions</li>
+                    <li>Tone analysis and adjustment</li>
+                    <li>AI research assistant with source citations</li>
+                    <li>Multi-language support (50+ languages)</li>
+                    <li>Writing analytics and progress tracking</li>
+                    <li>Plagiarism detection</li>
+                    <li>Browser extension + desktop app</li>
+                    <li>Works with Google Docs, Word, Notion, Gmail</li>
+                    <li>Priority support</li>
+                </ul>
+                <a href="#" class="btn btn-primary" style="margin-top: 21px;">Start Free Trial</a>
+            </div>
+        </section>
+
+        <!-- Comparison -->
+        <section class="comparison">
+            <h2>Writing Studio vs. The Competition</h2>
+            <div class="comparison-grid">
+                <div class="comparison-card">
+                    <h3>Grammarly Premium</h3>
+                    <p class="old-price">$12/month</p>
+                    <p class="old-price">Basic grammar only</p>
+                    <p class="old-price">No research tools</p>
+                    <div class="vs">VS</div>
+                    <h3 style="color: var(--hot-pink);">Writing Studio</h3>
+                    <p class="new-price">$12/month</p>
+                    <p class="new-price">Grammar + AI research</p>
+                    <p class="new-price">All features included</p>
+                    <div class="savings">More features, same price</div>
+                </div>
+                <div class="comparison-card">
+                    <h3>ProWritingAid</h3>
+                    <p class="old-price">$20/month</p>
+                    <p class="old-price">Confusing interface</p>
+                    <p class="old-price">Slow suggestions</p>
+                    <div class="vs">VS</div>
+                    <h3 style="color: var(--hot-pink);">Writing Studio</h3>
+                    <p class="new-price">$12/month</p>
+                    <p class="new-price">Clean, intuitive</p>
+                    <p class="new-price">Real-time feedback</p>
+                    <div class="savings">Save $96/year</div>
+                </div>
+                <div class="comparison-card">
+                    <h3>Hemingway Editor</h3>
+                    <p class="old-price">$19.99 one-time</p>
+                    <p class="old-price">Desktop only</p>
+                    <p class="old-price">No AI assistance</p>
+                    <div class="vs">VS</div>
+                    <h3 style="color: var(--hot-pink);">Writing Studio</h3>
+                    <p class="new-price">$12/month</p>
+                    <p class="new-price">Everywhere you write</p>
+                    <p class="new-price">Full AI-powered suite</p>
+                    <div class="savings">Always up to date</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Who it's for -->
+        <section class="features">
+            <h2>Built For Every Writer</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">✍️</div>
+                    <h3>Content Creators</h3>
+                    <p>Blog posts, articles, social media. Write faster with AI assistance while maintaining your unique voice.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎓</div>
+                    <h3>Students</h3>
+                    <p>Essays, research papers, thesis. Grammar help, citation management, and plagiarism detection in one tool.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💼</div>
+                    <h3>Professionals</h3>
+                    <p>Emails, reports, proposals. Write with confidence knowing your tone and clarity are perfect for business.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📖</div>
+                    <h3>Authors</h3>
+                    <p>Novels, short stories, scripts. Track your progress, improve your style, and finish that book.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <h3>Non-Native Speakers</h3>
+                    <p>Learn while you write. Context-aware suggestions help you master English (or any language) naturally.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h3>Anyone Who Writes</h3>
+                    <p>If you put words on a screen, Writing Studio makes them better. Simple as that.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="hero">
+            <h2>Start writing better today</h2>
+            <p class="tagline">14-day free trial. No credit card required. Cancel anytime.</p>
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-primary">Start Free Trial</a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2026 BlackRoad OS, Inc. All rights reserved.</p>
+            <p>Built with Claude Code</p>
+        </footer>
+    </div>
+</body>
+</html>
