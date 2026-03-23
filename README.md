@@ -1,63 +1,20 @@
-# ✍️ Writing Studio — Typography Analyzer
+# writing-studio
 
-Part of **BlackRoad Studio** — production creative tools.
+Writing Studio - Content creation platform with AI-powered writing assistance, grammar, style, and research tools.
 
-Analyze readability, generate type scales, check WCAG contrast, and suggest font pairings — pure Python, zero dependencies.
+## Organization
 
-## Features
+**BlackRoad-Studio** — Creative — canvas, video, writing, design
 
-- **Flesch Reading Ease** — sentence/syllable analysis, grade level scoring
-- **Type scale generator** — modular scale with any ratio (golden ratio default: 1.618)
-- **WCAG contrast checker** — AA / AAA grades for fg/bg pairs
-- **Line-height recommendations** — WCAG 1.4.12 compliance
-- **Measure (line-length) checker** — 45–75 character sweet-spot
-- **Font pairing suggestions** — rule-based category contrast
-- **CSS / Tailwind exports** — `@import`, `font-family`, CSS vars
-- **SQLite font library** — save, query, delete fonts
+## BlackRoad OS
 
-## Quick start
+BlackRoad OS is a distributed AI operating system — 20 domains, 668 repositories, 1,000 AI agents, and sovereign infrastructure running on Raspberry Pis and Hailo-8 accelerators. No cloud dependency.
 
-```bash
-# Analyze text readability
-python src/typography_analyzer.py readability "Your text here" --size 16 --lh 1.6
+- [blackroad.io](https://blackroad.io) — Main platform
+- [docs.blackroad.io](https://docs.blackroad.io) — Documentation
+- [GitHub](https://github.com/BlackRoad-Studio) — This organization
 
-# Generate type scale (golden ratio)
-python src/typography_analyzer.py scale --base 1.0 --ratio 1.618 --css
+**Language:** Python
 
-# Check WCAG contrast
-python src/typography_analyzer.py contrast '#1e293b' '#f8fafc'
 
-# Add a font
-python src/typography_analyzer.py add-font "Inter" sans-serif --weights 400,600,700 --gid Inter
-
-# Suggest pairings
-python src/typography_analyzer.py pair <font-id>
-```
-
-## Common ratios
-
-| Name | Ratio | Effect |
-|---|---|---|
-| Minor Second | 1.067 | Subtle scale |
-| Major Second | 1.125 | Gentle |
-| Minor Third | 1.2 | Comfortable |
-| Major Third | 1.25 | Clear hierarchy |
-| Perfect Fourth | 1.333 | Traditional |
-| Golden Ratio | **1.618** | Harmonious |
-
-## Tests
-
-```bash
-pip install pytest pytest-cov
-pytest tests/ -v --cov=src
-```
-
----
-
-**Proprietary Software — BlackRoad OS, Inc.**
-
-This software is proprietary to BlackRoad OS, Inc. Source code is publicly visible for transparency and collaboration. Commercial use, forking, and redistribution are prohibited without written authorization.
-
-**BlackRoad OS — Pave Tomorrow.**
-
-*Copyright 2024-2026 BlackRoad OS, Inc. All Rights Reserved.*
+*© 2024-2026 BlackRoad OS, Inc. All Rights Reserved.*
